@@ -1,0 +1,96 @@
+name: 🤖 WhatsApp Bot - Tustus Scraper
+
+on:
+  schedule:
+    # Run 5 times daily at 8:00, 11:00, 14:00, 17:00, 20:00 UTC
+    # Israel time: 10:00, 13:00, 16:00, 19:00, 22:00
+    - cron: '0 8,11,14,17,20 * * *'
+  workflow_dispatch: # Allow manual triggering
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'whatsapp_bot.py'
+      - 'scheduler.py'
+      - 'requirements.txt'
+
+jobs:
+  run-bot:
+    name: 🚀 Run Tustus Bot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: 🔧 Install system dependencies
+      run: |
+        sudo apt-get update -q
+        sudo apt-get install -y wget gnupg unzip curl
+        # Add Google Chrome repository
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+        sudo apt-get update -q
+        sudo apt-get install -y google-chrome-stable
+        # Clean up
+        sudo apt-get autoremove -y
+        sudo apt-get clean
+        
+    - name: 🚗 Install ChromeDriver
+      run: |
+        CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1-3)
+        echo "Chrome version: $CHROME_VERSION"
+        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
+        echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
+        wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+        sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+        chromedriver --version
+        
+    - name: 📦 Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --no-cache-dir -r requirements.txt
+        
+    - name: 🔍 Validate environment
+      run: |
+        echo "Checking required environment variables..."
+        if [ -z "${{ secrets.TARGET_URL }}" ]; then echo "❌ TARGET_URL not set"; exit 1; fi
+        if [ -z "${{ secrets.RESEND_API_KEY }}" ]; then echo "❌ RESEND_API_KEY not set"; exit 1; fi
+        if [ -z "${{ secrets.TO_EMAIL }}" ]; then echo "❌ TO_EMAIL not set"; exit 1; fi
+        echo "✅ All required environment variables are set"
+        
+    - name: 🤖 Run WhatsApp Bot
+      env:
+        TARGET_URL: ${{ secrets.TARGET_URL }}
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+        TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        EMAIL_SUBJECT: ${{ secrets.EMAIL_SUBJECT }}
+        REQUEST_TIMEOUT: ${{ secrets.REQUEST_TIMEOUT }}
+      run: |
+        echo "🚀 Starting WhatsApp Bot at $(date)"
+        python whatsapp_bot.py
+        echo "✅ Bot execution completed at $(date)"
+        
+    - name: 📊 Upload execution logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: bot-execution-logs-${{ github.run_number }}
+        path: |
+          bot_scheduler.log
+          *.log
+        retention-days: 7
+        
+    - name: 📧 Notify on failure
+      if: failure()
+      run: |
+        echo "❌ Bot execution failed at $(date)"
+        echo "Check the logs in the Actions tab for details"

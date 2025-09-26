@@ -1,5 +1,9 @@
 # WhatsApp Bot Dependencies
-# Core web scraping with HTTP requests
+# Core web scraping with Selenium
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# HTTP requests and parsing
 requests>=2.31.0
 beautifulsoup4>=4.12.0
 lxml>=4.9.0
@@ -14,7 +18,7 @@ python-dotenv>=1.0.0
 urllib3>=2.0.0
 html5lib>=1.1
 
-# Optional: For enhanced logging and scheduling
+# Scheduling and logging
 schedule>=1.2.0
 colorama>=0.4.6
 
