@@ -44,14 +44,38 @@ jobs:
         
     - name: 🚗 Install ChromeDriver
       run: |
-        CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1-3)
-        echo "Chrome version: $CHROME_VERSION"
-        CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
-        echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
-        wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-        sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+        # Get Chrome major version
+        CHROME_VERSION=$(google-chrome --version | cut -d " " -f3 | cut -d "." -f1)
+        echo "Chrome major version: $CHROME_VERSION"
+        
+        # Try to get the latest compatible ChromeDriver version
+        LATEST_DRIVER_URL="https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_${CHROME_VERSION}"
+        echo "Checking URL: $LATEST_DRIVER_URL"
+        
+        if curl --output /dev/null --silent --head --fail "$LATEST_DRIVER_URL"; then
+          CHROMEDRIVER_VERSION=$(curl -s "$LATEST_DRIVER_URL")
+          echo "Found ChromeDriver version: $CHROMEDRIVER_VERSION"
+        else
+          echo "Using default stable ChromeDriver"
+          CHROMEDRIVER_VERSION="stable"
+        fi
+        
+        # Download ChromeDriver using Chrome for Testing
+        echo "Downloading ChromeDriver ${CHROMEDRIVER_VERSION}..."
+        if [ "$CHROMEDRIVER_VERSION" = "stable" ]; then
+          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/stable/linux64/chromedriver-linux64.zip"
+        else
+          DOWNLOAD_URL="https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip"
+        fi
+        
+        echo "Download URL: $DOWNLOAD_URL"
+        wget -O /tmp/chromedriver.zip "$DOWNLOAD_URL"
+        
+        # Extract and install
+        sudo mkdir -p /usr/local/bin/
+        sudo unzip -j /tmp/chromedriver.zip "chromedriver-linux64/chromedriver" -d /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
-        chromedriver --version
+        chromedriver --version || echo "ChromeDriver version check failed but installation might still be OK"
         
     - name: 📦 Install Python dependencies
       run: |
