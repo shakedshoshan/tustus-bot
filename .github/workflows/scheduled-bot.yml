@@ -18,6 +18,7 @@ jobs:
     name: 🚀 Run Tustus Bot
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    environment: TARGET_URL
     
     steps:
     - name: 📥 Checkout code
@@ -85,7 +86,7 @@ jobs:
     - name: 🔍 Validate environment
       run: |
         echo "Checking required environment variables..."
-        if [ -z "${{ secrets.SECRETS_TARGET_URL }}" ]; then echo "❌ TARGET_URL not set"; exit 1; fi
+        if [ -z "${{ secrets.SECRETS_TARGET_URL }}" ]; then echo "❌ SECRETS_TARGET_URL not set"; exit 1; fi
         if [ -z "${{ secrets.RESEND_API_KEY }}" ]; then echo "❌ RESEND_API_KEY not set"; exit 1; fi
         if [ -z "${{ secrets.TO_EMAIL }}" ]; then echo "❌ TO_EMAIL not set"; exit 1; fi
         echo "✅ All required environment variables are set"
