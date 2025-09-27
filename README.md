@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 2. Edit `.env` with your actual values:
    ```env
-   TARGET_URL=https://your-target-website.com
+   SECRETS_TARGET_URL=https://your-target-website.com
    CHROME_DRIVER_PATH=chromedriver.exe
    TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxx
    TWILIO_AUTH_TOKEN=your_auth_token_here
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `TARGET_URL` | Website to scrape | `https://example.com/data` |
+| `SECRETS_TARGET_URL` | Website to scrape | `https://example.com/data` |
 | `CHROME_DRIVER_PATH` | Path to ChromeDriver | `chromedriver.exe` |
 | `TWILIO_ACCOUNT_SID` | Your Twilio Account SID | `ACxxxxxxxxxxxxx` |
 | `TWILIO_AUTH_TOKEN` | Your Twilio Auth Token | `your_token_here` |

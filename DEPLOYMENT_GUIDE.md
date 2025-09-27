@@ -35,7 +35,7 @@ git push origin main
 
 | Secret Name | Value | Description |
 |-------------|-------|-------------|
-| `TARGET_URL` | `https://www.tustus.co.il/Arkia/Home` | Website to scrape |
+| `SECRETS_TARGET_URL` | `https://www.tustus.co.il/Arkia/Home` | Website to scrape |
 | `RESEND_API_KEY` | `re_C3uDPvQ3_JPsxnE6RiABMDucv8UUwMPW7` | Your Resend API key |
 | `FROM_EMAIL` | `onboarding@resend.dev` | Sender email |
 | `TO_EMAIL` | `shakedshoshan8@gmail.com` | Your email |

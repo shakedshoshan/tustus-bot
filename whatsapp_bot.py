@@ -30,7 +30,7 @@ from email.mime.multipart import MIMEMultipart
 load_dotenv()
 
 # --- Configuration ---
-TARGET_URL = os.environ.get("TARGET_URL", "http://example.com/data")
+SECRETS_TARGET_URL = os.environ.get("SECRETS_TARGET_URL", "http://example.com/data")
 REQUEST_TIMEOUT = int(os.environ.get("REQUEST_TIMEOUT", "30"))
 
 # --- Resend Configuration ---
@@ -337,7 +337,7 @@ class WhatsAppBot:
             return False
         
         # Scrape data
-        scraped_data = self.scrape_data(TARGET_URL)
+        scraped_data = self.scrape_data(SECRETS_TARGET_URL)
         
         # Send email update
         success = self.send_email_update(scraped_data)
@@ -350,7 +350,7 @@ class WhatsAppBot:
     def _validate_configuration(self):
         """Validate that all required configuration is present."""
         required_vars = {
-            "TARGET_URL": TARGET_URL,
+            "SECRETS_TARGET_URL": SECRETS_TARGET_URL,
             "RESEND_API_KEY": RESEND_API_KEY,
             "FROM_EMAIL": FROM_EMAIL,
             "TO_EMAIL": TO_EMAIL,

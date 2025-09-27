@@ -15,7 +15,7 @@ class Config:
     """Configuration class with all bot settings."""
     
     # ===== WEB SCRAPING SETTINGS =====
-    TARGET_URL = os.environ.get("TARGET_URL", "https://example.com")
+    SECRETS_TARGET_URL = os.environ.get("SECRETS_TARGET_URL", "https://example.com")
     CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver.exe")
     SCRAPING_TIMEOUT = int(os.environ.get("SCRAPING_TIMEOUT", "30"))
     
@@ -48,7 +48,7 @@ class Config:
             "TWILIO_ACCOUNT_SID": cls.TWILIO_ACCOUNT_SID,
             "TWILIO_AUTH_TOKEN": cls.TWILIO_AUTH_TOKEN,
             "MY_PHONE_NUMBER": cls.MY_PHONE_NUMBER,
-            "TARGET_URL": cls.TARGET_URL
+            "SECRETS_TARGET_URL": cls.SECRETS_TARGET_URL
         }
         
         missing = [setting for setting, value in required_settings.items() if not value]
@@ -81,7 +81,7 @@ class Config:
     def print_configuration(cls):
         """Print current configuration (hiding sensitive data)."""
         print("🔧 Current Configuration:")
-        print(f"   Target URL: {cls.TARGET_URL}")
+        print(f"   Target URL: {cls.SECRETS_TARGET_URL}")
         print(f"   Chrome Driver: {cls.CHROME_DRIVER_PATH}")
         print(f"   Headless Mode: {cls.HEADLESS_MODE}")
         print(f"   Max Items: {cls.MAX_ITEMS_PER_MESSAGE}")

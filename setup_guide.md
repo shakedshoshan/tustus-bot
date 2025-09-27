@@ -28,7 +28,7 @@ pip install -r requirements.txt
 copy env.example .env
 
 # Edit .env file with:
-TARGET_URL=https://your-website.com
+SECRETS_TARGET_URL=https://your-website.com
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxx
 TWILIO_AUTH_TOKEN=your_token
 MY_PHONE_NUMBER=whatsapp:+1234567890
