@@ -1,6 +1,6 @@
 # 🤖 Personal WhatsApp Bot
 
-A powerful Python bot that scrapes data from websites using Selenium and sends automated WhatsApp messages via the Twilio API. Perfect for daily updates, monitoring, and personal automation tasks.
+A Python bot that scrapes data from websites using Selenium and sends automated WhatsApp messages via the Resend API. Perfect for daily updates, monitoring, and personal automation tasks.
 
 ## 🚀 Features
 
