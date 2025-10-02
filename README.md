@@ -5,7 +5,7 @@ A Python bot that scrapes data from websites using Selenium and sends automated 
 ## 🚀 Features
 
 - **Web Scraping**: Uses Selenium WebDriver for dynamic content extraction
-- **WhatsApp Integration**: Reliable messaging through Twilio's WhatsApp API
+- **Resend Integration**: Reliable messaging through resend's WhatsApp API
 - **Headless Operation**: Runs silently in the background
 - **Error Handling**: Comprehensive error handling and notifications
 - **Configurable**: Easy setup through environment variables
