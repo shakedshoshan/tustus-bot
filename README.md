@@ -8,7 +8,6 @@ A Python bot that scrapes data from websites using Selenium and sends automated 
 - **Resend Integration**: Reliable messaging through resend's WhatsApp API
 - **Headless Operation**: Runs silently in the background
 - **Error Handling**: Comprehensive error handling and notifications
-- **Configurable**: Easy setup through environment variables
 - **Scheduling Ready**: Perfect for automated daily runs
 
 ## 📋 Prerequisites
