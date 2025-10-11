@@ -40,14 +40,7 @@ pip install -r requirements.txt
 2. Download matching ChromeDriver from [ChromeDriver Downloads](https://chromedriver.chromium.org/)
 3. Extract and place `chromedriver.exe` in your project folder or system PATH
 
-### 4. Set Up Twilio WhatsApp
-
-1. **Create Twilio Account**: Sign up at [Twilio Console](https://console.twilio.com/)
-2. **Access WhatsApp Sandbox**: Go to Messaging → Try it out → Send a WhatsApp message
-3. **Join Sandbox**: Send the provided code to the Twilio WhatsApp number
-4. **Get Credentials**: Note your Account SID and Auth Token
-
-### 5. Configure Environment Variables
+### 4. Configure Environment Variables
 
 1. Copy the example configuration:
    ```bash
