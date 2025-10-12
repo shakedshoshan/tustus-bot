@@ -17,7 +17,7 @@ Before you begin, ensure you have the following:
 - **Python 3.8+** installed on your machine
 - **Google Chrome** browser installed
 - **ChromeDriver** compatible with your Chrome version
-- **Twilio Account** with WhatsApp Sandbox access
+- **Resend Account** to sendinf emails 
 
 ## 🛠️ Installation
 
