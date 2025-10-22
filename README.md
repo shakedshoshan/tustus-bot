@@ -1,6 +1,6 @@
 # 🤖 Cheap Fligths Alert Bot
 
-A Python bot that scrapes data from websites using Selenium and sends automated WhatsApp messages via the Resend API. Perfect for daily updates by personal prefference (destenations).
+A Python bot that scrapes data from websites using Selenium and sends automated Emails messages via the Resend API. Perfect for daily updates by personal prefference (destenations).
 
 ## 🚀 Features
 
