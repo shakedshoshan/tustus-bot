@@ -51,8 +51,6 @@ pip install -r requirements.txt
    ```env
    SECRETS_TARGET_URL=https://your-target-website.com
    CHROME_DRIVER_PATH=chromedriver.exe
-   TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxx
-   TWILIO_AUTH_TOKEN=your_auth_token_here
    MY_PHONE_NUMBER=whatsapp:+1234567890
    ```
 
