@@ -8,7 +8,6 @@ This guide shows you how to deploy your WhatsApp bot using GitHub Actions for co
 - ✅ **Built-in Cron Scheduling** (5 times daily)
 - ✅ **No server maintenance** required
 - ✅ **Automatic Chrome/ChromeDriver setup**
-- ✅ **Easy to monitor and debug**
 - ✅ **Runs on GitHub's reliable infrastructure**
 
 ## 📋 **Prerequisites**
