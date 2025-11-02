@@ -50,7 +50,6 @@ pip install -r requirements.txt
    ```env
    SECRETS_TARGET_URL=https://your-target-website.com
    CHROME_DRIVER_PATH=chromedriver.exe
-   MY_PHONE_NUMBER=whatsapp:+1234567890
    ```
 
 ## ⚙️ Configuration
