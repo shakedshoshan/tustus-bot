@@ -61,7 +61,6 @@ pip install -r requirements.txt
 | `SECRETS_TARGET_URL` | Website to scrape | `https://example.com/data` |
 | `CHROME_DRIVER_PATH` | Path to ChromeDriver | `chromedriver.exe` |
 | `TWILIO_ACCOUNT_SID` | Your Twilio Account SID | `ACxxxxxxxxxxxxx` |
-| `TWILIO_AUTH_TOKEN` | Your Twilio Auth Token | `your_token_here` |
 | `MY_PHONE_NUMBER` | Your WhatsApp number | `whatsapp:+1234567890` |
 
 ### Customizing Data Extraction
